@@ -1,5 +1,5 @@
 """
-Athena Core — Page 4: Intelligence Artificielle
+Athena Core â€” Page 4: Intelligence Artificielle
 """
 import streamlit as st
 import pandas as pd
@@ -14,35 +14,35 @@ from analytics.segmentation import compute_rfm, rfm_scoring, kmeans_segmentation
 from analytics.performance import performance_by_product
 from strategy.bcg_matrix import compute_bcg
 
-st.set_page_config(page_title="Intelligence IA — Athena Core", layout="wide")
+st.set_page_config(page_title="Intelligence IA â€” Athena Core", layout="wide")
 inject_css()
-page_header("Intelligence Artificielle", "Prédictions, détection d'anomalies et recommandations automatiques")
+page_header("Intelligence Artificielle", "PrÃ©dictions, dÃ©tection d'anomalies et recommandations automatiques")
 
-tab1, tab2, tab3 = st.tabs(["Prédictions", "Anomalies", "Recommandations"])
+tab1, tab2, tab3 = st.tabs(["PrÃ©dictions", "Anomalies", "Recommandations"])
 
 daily = load_daily_revenue()
 oi = load_order_items()
 orders = load_orders()
 
 # -------------------------------------------------------------------
-# TAB 1 — PREDICTIONS
+# TAB 1 â€” PREDICTIONS
 # -------------------------------------------------------------------
 with tab1:
-    st.subheader("Prédiction des Ventes — Machine Learning")
+    st.subheader("PrÃ©diction des Ventes â€” Machine Learning")
 
-    with st.spinner("Entraînement du modèle RandomForest..."):
+    with st.spinner("EntraÃ®nement du modÃ¨le RandomForest..."):
         model, feature_cols, metrics = train_model(daily)
         forecast = forecast_future(model, daily, feature_cols, days=30)
 
     # Model metrics
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("MAE (Erreur Absolue Moyenne)", f"{metrics['mae']:,.0f}€")
+        st.metric("MAE (Erreur Absolue Moyenne)", f"{metrics['mae']:,.0f}â‚¬")
     with col2:
-        st.metric("RMSE", f"{metrics['rmse']:,.0f}€")
+        st.metric("RMSE", f"{metrics['rmse']:,.0f}â‚¬")
     with col3:
         total_forecast = forecast["predicted_revenue"].sum()
-        st.metric("CA Prévu (30j)", f"{total_forecast:,.0f}€")
+        st.metric("CA PrÃ©vu (30j)", f"{total_forecast:,.0f}â‚¬")
 
     # Forecast chart
     st.plotly_chart(forecast_chart(daily, forecast, metrics), use_container_width=True)
@@ -56,16 +56,16 @@ with tab1:
         st.plotly_chart(fig, use_container_width=True)
 
     # Forecast table
-    with st.expander("Tableau des Prévisions (30 jours)"):
+    with st.expander("Tableau des PrÃ©visions (30 jours)"):
         st.dataframe(forecast.rename(columns={
-            "date": "Date", "predicted_revenue": "CA Prévu (€)"
-        }), use_container_width=True, hide_index=True)
+            "date": "Date", "predicted_revenue": "CA PrÃ©vu (â‚¬)"
+        }), width="stretch", hide_index=True)
 
 # -------------------------------------------------------------------
-# TAB 2 — ANOMALIES
+# TAB 2 â€” ANOMALIES
 # -------------------------------------------------------------------
 with tab2:
-    st.subheader("Détection d'Anomalies — IsolationForest")
+    st.subheader("DÃ©tection d'Anomalies â€” IsolationForest")
 
     with st.spinner("Analyse des anomalies..."):
         rev_anomalies = detect_revenue_anomalies(daily)
@@ -80,7 +80,7 @@ with tab2:
         st.metric("Pics Positifs", pos)
     with col3:
         neg = len(rev_anomalies[rev_anomalies["anomaly_type"] == "spike_negatif"])
-        st.metric("Pics Négatifs", neg)
+        st.metric("Pics NÃ©gatifs", neg)
 
     st.plotly_chart(anomaly_chart(rev_anomalies), use_container_width=True)
 
@@ -90,23 +90,23 @@ with tab2:
         st.dataframe(prod_anomalies.rename(columns={
             "product": "Produit", "month": "Mois", "revenue": "Revenue",
             "avg_revenue": "Moy. Revenue", "z_score": "Z-Score", "type": "Type"
-        }), use_container_width=True, hide_index=True)
+        }), width="stretch", hide_index=True)
 
     # Alert list
     alerts = get_anomaly_alerts(rev_anomalies, prod_anomalies)
     if alerts:
-        st.markdown("#### Alertes Récentes")
+        st.markdown("#### Alertes RÃ©centes")
         for a in alerts:
             st.warning(f"{a['icon']} {a['message']}")
 
 # -------------------------------------------------------------------
-# TAB 3 — RECOMMANDATIONS
+# TAB 3 â€” RECOMMANDATIONS
 # -------------------------------------------------------------------
 with tab3:
     st.subheader("Recommandations Automatiques")
-    st.caption("Générées à partir de l'analyse BCG, RFM, anomalies et performance")
+    st.caption("GÃ©nÃ©rÃ©es Ã  partir de l'analyse BCG, RFM, anomalies et performance")
 
-    with st.spinner("Génération des recommandations..."):
+    with st.spinner("GÃ©nÃ©ration des recommandations..."):
         market = load_market_data()
         bcg = compute_bcg(oi, market)
         rfm = compute_rfm(orders)
@@ -119,7 +119,7 @@ with tab3:
         recs = generate_recommendations(bcg, rfm_clust, alerts, prod_perf)
 
     if not recs:
-        st.info("Aucune recommandation urgente — tout semble nominal.")
+        st.info("Aucune recommandation urgente â€” tout semble nominal.")
     else:
         # Summary
         high = sum(1 for r in recs if r["priority"] == "HIGH")
@@ -128,11 +128,11 @@ with tab3:
 
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.metric("Priorité Haute", high)
+            st.metric("PrioritÃ© Haute", high)
         with col2:
-            st.metric("Priorité Moyenne", med)
+            st.metric("PrioritÃ© Moyenne", med)
         with col3:
-            st.metric("Priorité Basse", low)
+            st.metric("PrioritÃ© Basse", low)
 
         st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
 
@@ -145,15 +145,15 @@ with tab3:
             with col_rec:
                 st.markdown(f"""
                 <div class="rec-card {css_class.get(rec['priority'], '')}">
-                    <strong>[{rec['icon']}] {rec['action']}</strong> — {rec['target']}<br>
+                    <strong>[{rec['icon']}] {rec['action']}</strong> â€” {rec['target']}<br>
                     <span style="color: #94A3B8; font-size: 0.9rem;">{rec['reason']}</span><br>
-                    <span style="font-size: 0.75rem; font-weight: bold;">Priorité: {priority_label.get(rec['priority'], '')}</span>
+                    <span style="font-size: 0.75rem; font-weight: bold;">PrioritÃ©: {priority_label.get(rec['priority'], '')}</span>
                 </div>
                 """, unsafe_allow_html=True)
             with col_act:
                 st.markdown("<br>", unsafe_allow_html=True)
                 if st.button("Appliquer", key=f"apply_{rec['target']}"):
-                    st.toast(f"Action '{rec['action']}' programmée pour {rec['target']}.")
+                    st.toast(f"Action '{rec['action']}' programmÃ©e pour {rec['target']}.")
 
 st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
 if st.button("Relancer l'Analyse IA", type="primary"):
