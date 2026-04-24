@@ -6,7 +6,7 @@
 
 **Athena Core** is an intelligent, end-to-end Decision-Support Platform designed for modern enterprises. It processes complex sales data and strategic inputs to deliver actionable insights through a powerful four-tiered intelligence architecture.
 
-## 🚀 Features
+# Features
 
 Athena Core provides insights across four distinct levels:
 
@@ -15,7 +15,7 @@ Athena Core provides insights across four distinct levels:
 3. **Strategic Models:** Automatically generated strategic frameworks including the BCG Matrix, McKinsey Matrix, SWOT, PESTEL, and Porter's Five Forces.
 4. **Artificial Intelligence:** Machine Learning models (Scikit-learn, XGBoost) for sales forecasting, anomaly detection, automated recommendations, and an AI-driven Chatbot Assistant.
 
-## 🛠️ Architecture & Tech Stack
+# Architecture & Tech Stack
 
 - **Frontend Interface:** Built with [Streamlit](https://streamlit.io/) for a dynamic, reactive user experience.
 - **Data Processing:** Powered by `pandas` and `numpy`.
@@ -23,7 +23,7 @@ Athena Core provides insights across four distinct levels:
 - **Machine Learning:** `scikit-learn` and `xgboost` power the predictive intelligence.
 - **Visualizations:** Interactive charts built with `plotly`.
 
-## 📦 Installation & Setup
+# nstallation & Setup
 
 1. **Clone the repository:**
    ```bash
@@ -47,11 +47,11 @@ Athena Core provides insights across four distinct levels:
    streamlit run app.py
    ```
 
-## 📊 Using Your Own Data
+# Using Your Own Data
 
 Athena Core features a highly flexible data import pipeline. 
 Navigate to the **"Import Données"** tab in the application to upload your own CSV or Excel transaction files. The built-in column mapping interface will seamlessly adapt your data schema to the core models.
 
-## 📄 License
+# License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
