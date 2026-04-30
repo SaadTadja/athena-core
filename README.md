@@ -23,11 +23,11 @@ Athena Core provides insights across four distinct levels:
 - **Machine Learning:** `scikit-learn` and `xgboost` power the predictive intelligence.
 - **Visualizations:** Interactive charts built with `plotly`.
 
-# nstallation & Setup
+# Installation & Setup
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/athena-core.git
+   git clone https://github.com/SaadTadja/athena-core.git
    cd athena-core
    ```
 
