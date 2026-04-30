@@ -23,6 +23,12 @@ page_header("Analyse Avancée", "Tendances, segmentation clients et performances
 
 tab1, tab2, tab3 = st.tabs(["Tendances", "Segmentation", "Performance"])
 
+# Guard: if no data, show a message and stop
+oi_check = load_order_items()
+if oi_check.empty:
+    st.warning("Aucune donnée disponible. Veuillez importer un jeu de données dans l'onglet **Import Donnees**.")
+    st.stop()
+
 # ═══════════════════════════════════════════════════════════════════
 # TAB 1 — TENDANCES
 # ═══════════════════════════════════════════════════════════════════

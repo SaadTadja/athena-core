@@ -61,7 +61,7 @@ def detect_product_anomalies(order_items_df):
                 "revenue": last["revenue"],
                 "avg_revenue": round(mean_rev, 2),
                 "z_score": round(z_score, 2),
-                "type": "📈 Pic" if z_score > 0 else "📉 Chute",
+                "type": "Pic" if z_score > 0 else "Chute",
             })
 
     return pd.DataFrame(anomalies) if anomalies else pd.DataFrame(
@@ -73,7 +73,7 @@ def get_anomaly_alerts(rev_anomalies_df, prod_anomalies_df):
     alerts = []
     recent = rev_anomalies_df[rev_anomalies_df["is_anomaly"]].tail(5)
     for _, r in recent.iterrows():
-        icon = "🔺" if r["anomaly_type"] == "spike_positif" else "🔻"
+        icon = "(+)" if r["anomaly_type"] == "spike_positif" else "(-)"
         alerts.append({
             "icon": icon,
             "message": f"Anomalie détectée le {r['order_date'].strftime('%Y-%m-%d') if hasattr(r['order_date'], 'strftime') else r['order_date']}: CA = {r['revenue']:.0f}€",
@@ -81,7 +81,7 @@ def get_anomaly_alerts(rev_anomalies_df, prod_anomalies_df):
         })
     for _, r in prod_anomalies_df.head(5).iterrows():
         alerts.append({
-            "icon": "⚠️",
+            "icon": "(!)",
             "message": f"{r['type']} sur {r['product']}: {r['revenue']:.0f}€ vs moy {r['avg_revenue']:.0f}€",
             "type": "product",
         })

@@ -24,6 +24,11 @@ daily = load_daily_revenue()
 oi = load_order_items()
 orders = load_orders()
 
+# Guard: if no data, show a message and stop
+if daily.empty or oi.empty or orders.empty:
+    st.warning("Aucune donnée disponible. Veuillez importer un jeu de données dans l'onglet **Import Donnees**.")
+    st.stop()
+
 # -------------------------------------------------------------------
 # TAB 1 — PREDICTIONS
 # -------------------------------------------------------------------
@@ -35,12 +40,14 @@ with tab1:
         forecast = forecast_future(model, daily, feature_cols, days=30)
 
     # Model metrics
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("MAE (Erreur Absolue Moyenne)", f"{metrics['mae']:,.0f}€")
+        st.metric("Score R² (Précision)", f"{metrics.get('r2', 0):.2f}")
     with col2:
-        st.metric("RMSE", f"{metrics['rmse']:,.0f}€")
+        st.metric("MAE (Erreur Moyenne)", f"{metrics['mae']:,.0f}€")
     with col3:
+        st.metric("RMSE", f"{metrics['rmse']:,.0f}€")
+    with col4:
         total_forecast = forecast["predicted_revenue"].sum()
         st.metric("CA Prévu (30j)", f"{total_forecast:,.0f}€")
 
@@ -137,7 +144,7 @@ with tab3:
         st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
 
         # Render recommendation cards
-        for rec in recs:
+        for idx, rec in enumerate(recs):
             css_class = {"HIGH": "rec-high", "MEDIUM": "rec-medium", "LOW": "rec-low"}
             priority_label = {"HIGH": "HAUTE", "MEDIUM": "MOYENNE", "LOW": "BASSE"}
             
@@ -152,7 +159,7 @@ with tab3:
                 """, unsafe_allow_html=True)
             with col_act:
                 st.markdown("<br>", unsafe_allow_html=True)
-                if st.button("Appliquer", key=f"apply_{rec['target']}"):
+                if st.button("Appliquer", key=f"apply_{idx}_{rec['target']}"):
                     st.toast(f"Action '{rec['action']}' programmée pour {rec['target']}.")
 
 st.markdown('<hr class="section-divider">', unsafe_allow_html=True)

@@ -144,15 +144,36 @@ def process_and_inject_df(df):
 
     # 7. Strategic Inputs (SWOT / PESTEL / Porter)
     print("Insertion des modeles strategiques (SWOT/PESTEL/Porter)...")
-    from data.seed_data import generate_all
-    # We can just steal the strategic inputs from seed_data logic, let's hardcode a few
     swot_data = [
         ("SWOT", "Force", "Excellente rétention des clients 'Consumer'", 8, 0),
         ("SWOT", "Faiblesse", "Pertes sur la catégorie 'Furniture/Tables'", 7, 0),
         ("SWOT", "Opportunité", "Expansion dans l'Est des États-Unis", 8, 0),
         ("SWOT", "Menace", "Augmentation des coûts de transport ('Same Day')", 6, 0),
     ]
-    for type_, cat, desc, score, impact in swot_data:
+    pestel_data = [
+        ("PESTEL", "Politique", "Politique de soutien au commerce digital", 3, 70),
+        ("PESTEL", "Politique", "Taxes sur le e-commerce transfrontalier", -2, 50),
+        ("PESTEL", "Économique", "Croissance du PIB modérée (+1.2%)", 2, 80),
+        ("PESTEL", "Économique", "Inflation persistante (3-4%)", -3, 75),
+        ("PESTEL", "Socioculturel", "Adoption croissante du shopping mobile", 4, 90),
+        ("PESTEL", "Socioculturel", "Préférence pour les marques éthiques", 3, 65),
+        ("PESTEL", "Technologique", "IA et personnalisation en temps réel", 5, 85),
+        ("PESTEL", "Technologique", "Edge computing pour la logistique", 3, 60),
+        ("PESTEL", "Environnemental", "Normes carbone pour la livraison", -2, 70),
+        ("PESTEL", "Environnemental", "Demande d'emballages recyclables", 2, 80),
+        ("PESTEL", "Légal", "RGPD et protection des données renforcée", -3, 90),
+        ("PESTEL", "Légal", "Droit de rétractation étendu", -1, 60),
+    ]
+    porter_data = [
+        ("PORTER", "Pouvoir Fournisseurs", "Fournisseurs diversifiés, faible dépendance", 2, 0),
+        ("PORTER", "Pouvoir Clients", "Clients sensibles au prix, faible coût de switch", 4, 0),
+        ("PORTER", "Menace Nouveaux Entrants", "Barrières faibles, marché accessible", 4, 0),
+        ("PORTER", "Menace Substituts", "Alternatives nombreuses (magasins physiques, marketplaces)", 3, 0),
+        ("PORTER", "Rivalité Concurrentielle", "Marché très concurrentiel, guerre des prix", 5, 0),
+    ]
+    
+    all_strat = swot_data + pestel_data + porter_data
+    for type_, cat, desc, score, impact in all_strat:
         cursor.execute("INSERT INTO strategic_inputs (type, category, description, score, impact) VALUES (?, ?, ?, ?, ?)",
                        (type_, cat, desc, score, impact))
 

@@ -33,7 +33,7 @@ with tab1:
             st.success(f"Fichier chargé avec succès ! ({len(df)} lignes trouvées)")
             st.dataframe(df.head(3), width="stretch")
             
-            st.markdown("### 🔄 Mappage des colonnes")
+            st.markdown("### Mappage des colonnes")
             st.write("Associez les colonnes de votre fichier aux champs requis par Athena Core.")
             
             cols = list(df.columns)
@@ -72,6 +72,14 @@ with tab1:
                         
                     df_mapped = df.rename(columns=mapping)
                     
+                    # Force conversion to numeric to avoid string multiplication errors
+                    for num_col in ["sales", "quantity", "profit", "discount"]:
+                        if num_col in df_mapped.columns:
+                            # Remove non-numeric characters if it's a string (like currency symbols)
+                            if pd.api.types.is_string_dtype(df_mapped[num_col]) or df_mapped[num_col].dtype == object:
+                                df_mapped[num_col] = df_mapped[num_col].astype(str).str.replace(r'[^\d.,-]', '', regex=True).str.replace(',', '.')
+                            df_mapped[num_col] = pd.to_numeric(df_mapped[num_col], errors='coerce').fillna(0)
+                    
                     # Apply defaults for optional columns if missing
                     if "profit" not in df_mapped.columns: df_mapped["profit"] = df_mapped["sales"] * 0.2
                     if "sub_category" not in df_mapped.columns: df_mapped["sub_category"] = "Général"
@@ -83,14 +91,21 @@ with tab1:
                     if "country" not in df_mapped.columns: df_mapped["country"] = "Inconnu"
                     if "ship_mode" not in df_mapped.columns: df_mapped["ship_mode"] = "Standard Class"
                         
+                    # Validate required columns
+                    required_cols = ["order_id", "order_date", "sales", "quantity", "product_id", "product_name", "customer_name"]
+                    missing = [c for c in required_cols if c not in df_mapped.columns]
+                    
+                    if missing:
+                        raise ValueError(f"Certaines colonnes sont mappées en double ou manquantes : {', '.join(missing)}. Veuillez assigner une colonne unique pour chaque champ requis.")
+                        
                     try:
                         df_mapped["order_date"] = pd.to_datetime(df_mapped["order_date"])
                         reset_database()
                         process_and_inject_df(df_mapped)
                         st.cache_data.clear()
-                        st.success("✅ Base de données remplacée avec succès ! Vous pouvez maintenant explorer vos propres données.")
+                        st.success("Base de données remplacée avec succès ! Vous pouvez maintenant explorer vos propres données.")
                     except Exception as e:
-                        st.error(f"⚠️ Erreur lors de l'injection : {e}")
+                        st.error(f"Erreur lors de l'injection : {e}")
 
         except Exception as e:
             st.error(f"Erreur lors de la lecture du fichier : {e}")

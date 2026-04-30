@@ -24,6 +24,11 @@ orders = load_orders()
 market = load_market_data()
 strat_inputs = load_strategic_inputs()
 
+# Guard: if no data, show a message and stop
+if oi.empty or orders.empty:
+    st.warning("Aucune donnée disponible. Veuillez importer un jeu de données dans l'onglet **Import Donnees**.")
+    st.stop()
+
 # -------------------------------------------------------------------
 # TAB 1 — BCG
 # -------------------------------------------------------------------
@@ -111,6 +116,7 @@ with tab3:
 # -------------------------------------------------------------------
 with tab4:
     st.subheader("Analyse PESTEL — Facteurs Externes")
+    st.info("**Note sur les données :** Contrairement aux modèles basés sur les ventes, l'analyse PESTEL repose sur des données qualitatives. Vous pouvez personnaliser ces facteurs en important vos propres rapports (PDF/Word) dans l'onglet **Import Donnees**.")
     pestel = load_pestel(strat_inputs)
     pestel_radar = pestel_radar_data(pestel)
 
@@ -126,7 +132,7 @@ with tab4:
         if len(items) > 0:
             with st.expander(f"**{cat}** ({len(items)} facteurs)"):
                 for _, r in items.iterrows():
-                    icon = "?" if r["score"] > 0 else "?"
+                    icon = "(+)" if r["score"] > 0 else "(-)"
                     st.markdown(f"{icon} {r['description']} — Score: **{r['score']}** | "
                                 f"Probabilité: **{r['impact']}%** | "
                                 f"Pondéré: **{r['weighted_score']:.1f}**")
@@ -136,6 +142,7 @@ with tab4:
 # -------------------------------------------------------------------
 with tab5:
     st.subheader("5 Forces de Porter — Analyse Concurrentielle")
+    st.info("**Note sur les données :** L'analyse de Porter utilise des inputs stratégiques qualitatifs. Le radar ci-dessous affiche les valeurs par défaut. Importez vos propres notes stratégiques via l'onglet **Import Donnees** pour générer une analyse sur-mesure.")
     porter = load_porter(strat_inputs)
     porter_radar = porter_radar_data(porter)
 

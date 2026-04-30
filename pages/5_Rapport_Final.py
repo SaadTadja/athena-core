@@ -39,7 +39,7 @@ with col_title:
     page_header("Rapport Exécutif Stratégique", f"Généré automatiquement le {datetime.now().strftime('%d %B %Y')}")
 with col_btn:
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("ð¨ï¸ Imprimer / Sauvegarder en PDF", type="primary"):
+    if st.button("Imprimer / Sauvegarder en PDF", type="primary"):
         st.markdown("<script>window.print()</script>", unsafe_allow_html=True)
 
 st.markdown("---")
@@ -49,6 +49,11 @@ oi = load_order_items()
 orders = load_orders()
 daily = load_daily_revenue()
 market = load_market_data()
+
+# Guard: if no data, show a message and stop
+if oi.empty or orders.empty or daily.empty:
+    st.warning("Aucune donnée disponible. Veuillez importer un jeu de données dans l'onglet **Import Donnees**.")
+    st.stop()
 
 rev = compute_revenue(oi)
 margin = compute_gross_margin(oi)

@@ -4,10 +4,60 @@ Athena Core — Custom CSS Styles
 
 CUSTOM_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Roboto:wght@300;400;500;700&display=swap');
 
 h1, h2, h3, h4, h5, h6, p, .metric-value, .sub-header, .metric-label {
     font-family: 'Roboto', sans-serif;
+}
+
+/* Greek Quote Style */
+.greek-quote-container {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+    border-top: 1px solid #D4AF37;
+    border-bottom: 1px solid #D4AF37;
+    padding: 2rem 3rem;
+    margin: 2rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.greek-quote-container::before {
+    content: "«";
+    font-size: 4rem;
+    color: rgba(212, 175, 55, 0.15);
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-family: 'Cinzel', serif;
+}
+
+.greek-quote-container::after {
+    content: "»";
+    font-size: 4rem;
+    color: rgba(212, 175, 55, 0.15);
+    position: absolute;
+    bottom: -30px;
+    right: 20px;
+    font-family: 'Cinzel', serif;
+}
+
+.greek-quote {
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    color: #F8FAFC;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+}
+
+.greek-author {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #D4AF37;
+    margin-top: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 /* Main header */

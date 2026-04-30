@@ -4,6 +4,15 @@ Athena Core — Helper Utilities
 import streamlit as st
 
 
+def set_page_config(page_title="Athena Core", page_icon="💠", layout="wide"):
+    st.set_page_config(
+        page_title=page_title,
+        page_icon=page_icon,
+        layout=layout,
+        initial_sidebar_state="expanded"
+    )
+
+
 def format_currency(value):
     if value >= 1_000_000:
         return f"{value/1_000_000:.1f}M€"

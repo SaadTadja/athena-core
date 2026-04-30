@@ -27,8 +27,8 @@ def porter_radar_data(porter_df):
 
 def porter_threat_level(score):
     if score >= 4:
-        return "🔴 Élevé"
+        return "Élevé"
     elif score >= 2.5:
-        return "🟡 Moyen"
+        return "Moyen"
     else:
-        return "🟢 Faible"
+        return "Faible"

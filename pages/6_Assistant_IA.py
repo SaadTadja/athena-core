@@ -55,6 +55,11 @@ def load_chatbot_context():
 
 context = load_chatbot_context()
 
+# Guard: if no data, show a message and stop
+if not context or context.get("rev", 0) == 0:
+    st.warning("Aucune donnée disponible. Veuillez importer un jeu de données dans l'onglet **Import Donnees**.")
+    st.stop()
+
 # Render chat history
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):

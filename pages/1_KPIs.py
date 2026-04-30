@@ -23,6 +23,11 @@ order_items = load_order_items()
 orders = load_orders()
 daily_rev = load_daily_revenue()
 
+# Guard: if no data, show a message and stop
+if order_items.empty or orders.empty or daily_rev.empty:
+    st.warning("Aucune donnée disponible. Veuillez importer un jeu de données dans l'onglet **Import Donnees**.")
+    st.stop()
+
 # ─── Period filter ───────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### Filtres")

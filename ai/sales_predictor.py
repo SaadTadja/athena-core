@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import TimeSeriesSplit
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
 def prepare_features(daily_df):
@@ -32,7 +32,7 @@ def train_model(daily_df):
     
     if df.empty or len(df) < 5:
         return None, feature_cols, {
-            "mae": 0, "rmse": 0, "test_dates": [], "y_test": [], "y_pred": [],
+            "mae": 0, "rmse": 0, "r2": 0, "test_dates": [], "y_test": [], "y_pred": [],
             "importance": pd.DataFrame(columns=["feature", "importance"])
         }
 
@@ -49,6 +49,7 @@ def train_model(daily_df):
     y_pred = model.predict(X_test)
     mae = mean_absolute_error(y_test, y_pred)
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    r2 = r2_score(y_test, y_pred) if len(y_test) > 1 else 0
 
     # Feature importance
     importance = pd.DataFrame({
@@ -58,7 +59,7 @@ def train_model(daily_df):
 
     test_dates = df["order_date"].iloc[split_idx:].values
     return model, feature_cols, {
-        "mae": round(mae, 2), "rmse": round(rmse, 2),
+        "mae": round(mae, 2), "rmse": round(rmse, 2), "r2": round(r2, 3),
         "test_dates": test_dates, "y_test": y_test, "y_pred": y_pred,
         "importance": importance,
     }
