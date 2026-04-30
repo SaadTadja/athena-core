@@ -47,7 +47,7 @@ class LocalChatbot:
         intent = self.detect_intent(user_input)
         
         if intent == "greeting":
-            return "Bonjour ! Je suis votre Assistant IA Athena Core. Comment puis-je vous aider avec l'analyse de vos données aujourd'hui ?"
+            return "Bonjour ! Je suis votre Assistant Stratégique Athena Core. Comment puis-je vous aider avec l'analyse de vos données aujourd'hui ?"
             
         elif intent == "kpi_revenue":
             rev = context.get('rev', 0)

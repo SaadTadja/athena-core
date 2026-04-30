@@ -88,8 +88,8 @@ except Exception as e:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# 4. Plan d'Action IA
-st.markdown("### 3. Plan d'Action Recommandé (Généré par l'IA)")
+# 4. Plan d'Action Stratégique
+st.markdown("### 3. Plan d'Action Recommandé (Généré automatiquement par le système)")
 try:
     rfm = compute_rfm(orders)
     rfm_scored = rfm_scoring(rfm)

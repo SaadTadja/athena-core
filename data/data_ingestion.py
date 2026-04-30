@@ -157,7 +157,7 @@ def process_and_inject_df(df):
         ("PESTEL", "Économique", "Inflation persistante (3-4%)", -3, 75),
         ("PESTEL", "Socioculturel", "Adoption croissante du shopping mobile", 4, 90),
         ("PESTEL", "Socioculturel", "Préférence pour les marques éthiques", 3, 65),
-        ("PESTEL", "Technologique", "IA et personnalisation en temps réel", 5, 85),
+        ("PESTEL", "Technologique", "Algorithmes et personnalisation en temps réel", 5, 85),
         ("PESTEL", "Technologique", "Edge computing pour la logistique", 3, 60),
         ("PESTEL", "Environnemental", "Normes carbone pour la livraison", -2, 70),
         ("PESTEL", "Environnemental", "Demande d'emballages recyclables", 2, 80),

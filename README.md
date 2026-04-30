@@ -13,7 +13,7 @@ Athena Core provides insights across four distinct levels:
 1. **Classic KPIs:** Revenue, Orders, Average Basket, Gross Margin, and Top Products.
 2. **Advanced Analytics:** Trend detection, RFM (Recency, Frequency, Monetary) segmentation, and deeper performance metrics.
 3. **Strategic Models:** Automatically generated strategic frameworks including the BCG Matrix, McKinsey Matrix, SWOT, PESTEL, and Porter's Five Forces.
-4. **Artificial Intelligence:** Machine Learning models (Scikit-learn, XGBoost) for sales forecasting, anomaly detection, automated recommendations, and an AI-driven Chatbot Assistant.
+4. **Advanced Algorithms:** Machine Learning models (Scikit-learn, XGBoost) for sales forecasting, anomaly detection, automated recommendations, and a predictive Chatbot Assistant.
 
 # Architecture & Tech Stack
 

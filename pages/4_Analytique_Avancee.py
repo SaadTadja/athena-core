@@ -1,5 +1,5 @@
 """
-Athena Core — Page 4: Intelligence Artificielle
+Athena Core — Page 4: Analytique Avancée
 """
 import streamlit as st
 import pandas as pd
@@ -14,9 +14,9 @@ from analytics.segmentation import compute_rfm, rfm_scoring, kmeans_segmentation
 from analytics.performance import performance_by_product
 from strategy.bcg_matrix import compute_bcg
 
-st.set_page_config(page_title="Intelligence IA — Athena Core", layout="wide")
+st.set_page_config(page_title="Analytique Avancée — Athena Core", layout="wide")
 inject_css()
-page_header("Intelligence Artificielle", "Prédictions, détection d'anomalies et recommandations automatiques")
+page_header("Prévisions et Analytique Avancée", "Prédictions, détection d'anomalies et recommandations automatiques")
 
 tab1, tab2, tab3 = st.tabs(["Prédictions", "Anomalies", "Recommandations"])
 
@@ -163,6 +163,6 @@ with tab3:
                     st.toast(f"Action '{rec['action']}' programmée pour {rec['target']}.")
 
 st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
-if st.button("Relancer l'Analyse IA", type="primary"):
+if st.button("Actualiser l'Analyse", type="primary"):
     st.cache_data.clear()
     st.rerun()

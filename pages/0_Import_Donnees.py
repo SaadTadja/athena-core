@@ -145,7 +145,7 @@ with tab2:
                                (category_choice, "Document Uploadé", f"Extrait du fichier {doc_file.name}", 5, 0))
                 conn.commit()
                 conn.close()
-                st.success("Document archivé et indexé pour les recommandations IA.")
+                st.success("Document archivé et indexé pour le système de recommandations.")
                 
         except Exception as e:
             st.error(f"Impossible d'extraire le texte : {e}")

@@ -5,7 +5,7 @@ def main():
     # Page configuration
     st.set_page_config(
         page_title="Athena Core — Intelligence Stratégique",
-        page_icon="🏛️",
+        page_icon="💠",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -76,7 +76,7 @@ def main():
         st.write("""
         1. **Importation :** Allez dans la section **'Import Donnees'** pour charger vos fichiers.
         2. **KPIs :** Visualisez vos indicateurs de performance en temps réel.
-        3. **Analyses :** Explorez les tendances et les anomalies détectées par l'IA.
+        3. **Analyses :** Explorez les tendances et les anomalies détectées par nos algorithmes.
         4. **Stratégie :** Générez des modèles SWOT et des recommandations actionnables.
         """)
         
@@ -94,12 +94,12 @@ def main():
             st.write("""
             - Intégration de modèles XGBoost pour la prédiction.
             - Nouveau moteur de rendu pour les rapports PDF.
-            - Assistant IA contextuel amélioré.
+            - Assistant Stratégique contextuel amélioré.
             """)
 
     # Footer
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-    st.caption("Athena Core — Système d'aide à la décision propulsé par l'IA.")
+    st.caption("Athena Core — Système d'aide à la décision propulsé par nos algorithmes avancés.")
 
 if __name__ == "__main__":
     main()

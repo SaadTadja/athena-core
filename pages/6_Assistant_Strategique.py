@@ -1,5 +1,5 @@
 """
-Athena Core — Page 6: Assistant IA (Chatbot)
+Athena Core — Page 6: Assistant Stratégique
 """
 import streamlit as st
 from utils.styles import inject_css
@@ -13,9 +13,9 @@ from ai.recommendation_engine import generate_recommendations
 from analytics.segmentation import compute_rfm, rfm_scoring, kmeans_segmentation
 from analytics.performance import performance_by_product
 
-st.set_page_config(page_title="Assistant IA — Athena Core", layout="wide")
+st.set_page_config(page_title="Assistant Stratégique — Athena Core", layout="wide")
 inject_css()
-page_header("Assistant IA Décisionnel", "Posez vos questions sur la stratégie, les anomalies ou les recommandations")
+page_header("Assistant Stratégique Décisionnel", "Posez vos questions sur la stratégie, les anomalies ou les recommandations")
 
 # Initialize chatbot in session state
 if "chatbot" not in st.session_state:
@@ -23,7 +23,7 @@ if "chatbot" not in st.session_state:
     
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Bonjour ! Je suis l'assistant IA local de votre plateforme. Demandez-moi quelles sont les recommandations urgentes, s'il y a des anomalies, ou quel est l'état de notre matrice BCG."}
+        {"role": "assistant", "content": "Bonjour ! Je suis l'Assistant Stratégique de votre plateforme. Demandez-moi quelles sont les recommandations urgentes, s'il y a des anomalies, ou quel est l'état de notre matrice BCG."}
     ]
 
 # Load Context (Cached automatically by data_loader)
