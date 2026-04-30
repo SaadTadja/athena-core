@@ -10,7 +10,7 @@ DB_URL = f"sqlite:///{DB_PATH}"
 # ─── App ─────────────────────────────────────────────────────────
 APP_NAME = "Athena Core"
 APP_ICON = "■"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 
 # ─── Colors ──────────────────────────────────────────────────────
 COLORS = {

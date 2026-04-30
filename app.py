@@ -14,7 +14,7 @@ def main():
     inject_css()
     
     # Hero Section
-    st.markdown('<div class="main-header">Athena Core v1.0.0</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Athena Core v1.0.1</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Plateforme d\'intelligence stratégique et d\'analyse prédictive pour la Supply Chain.</div>', unsafe_allow_html=True)
     
     import base64
@@ -88,7 +88,7 @@ def main():
     with col2:
         st.markdown("#### État du Système")
         st.markdown('<div class="metric-card"><div class="metric-label">Status</div><div class="metric-value">Opérationnel</div></div>', unsafe_allow_html=True)
-        st.markdown('<div class="metric-card"><div class="metric-label">Version</div><div class="metric-value">1.0.0-Stable</div></div>', unsafe_allow_html=True)
+        st.markdown('<div class="metric-card"><div class="metric-label">Version</div><div class="metric-value">1.0.1-Stable</div></div>', unsafe_allow_html=True)
         
         with st.expander("Notes de version"):
             st.write("""
